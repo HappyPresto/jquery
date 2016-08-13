@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery</title>
+    <meta charset = "UTF-8">
+    <!--<link rel = "stylesheet" href = "style.css">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Add jQuery library -->
+	<link href="css/jquery-ui.css" rel="stylesheet">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+</head>
+<style>
+	form {
+		width: 600px;
+	}
+	input {
+		margin: 5px;
+	}
+	label {
+		width:200px;
+		float: left;
+		line-height: 28px;
+		padding-right: 10px;
+		text-align: right;
+		/* Трабл в лайн хайхд */ 
+	}
+	#PayPal + label, #Visa + label, #MasterCard + label {
+		width: auto;
+		float: none;
+		line-height: 18px;
+	}
+	.error_message {
+		display: none;
+		font-size: 12px;
+		color: red;
+		width: 170px;
+		margin: 0 auto;
+	}
+	#ttx_input label {
+		float: none;
+	}
+	#ttx_input p, #ttx_input input {display: none;}
+	#general:checked ~ #text_general {display: block;}
+	#detail:checked ~ #text_detail {display: block;}
+	#overview:checked ~ #text_overview {display: block;}
+	#reviews:checked ~ #text_reviews {display: block;}
+	
+</style>
+<body>
+	<div id="hello" title="Привет, мир!">
+		<p>Это диалоговое окно на самом деле является элементом div, размещенным на странице с помощью
+		абсолютного позиционирования</p>
+		<p>Попробуйте перетащить диалоговое окно по экрану. Вы можете это сделать!</p>
+	</div>
+	<div id="confirm">
+		<p>Вы действительно хотите удалить выбранный файл?</p>
+	</div>
+	<p>Информация об оплате</p>
+	<form action = "index.html" method = "POST">
+	<label>Имя </label><input type = "text" id = "username" name = "username"/><br />
+	<p class = "error_message">Введите Имя</p>
+	<label>Адрес </label><input type = "text" id = "useraddress" name = "useraddress"/><br />
+	<label id = "robot">Город </label><input type = "text" id = "usercity" name = "usercity"/><br />
+	<label>Область </label><input type = "text" id = "useroblast" name = "useroblast"/><br />
+	<label>Индекс </label><input type = "text" id = "userindex" name = "userindex"/><br />
+	<label style = "line-height: 18px;">Страна </label><select style="margin-left: 5px;" size="1" name = "usercountry" id = "usercountry">
+					<option selected value = "Россия">Россия</option>
+					<option value = "Бразилия">Бразилия</option>
+					<option value = "Германия">Германия</option>
+					<option value = "Австралия">Австралия</option>
+				  </select><br />
+	<label style = "line-height: 22px;">Система оплаты </label><input type = "radio" title = "PayPal" name = "oplata" id = "PayPal" value = "PayPal" checked = "checked"/><label for = "PayPal"> PayPal</label>
+	<input type = "radio" name = "oplata" id = "Visa" title = "Visa" value = "Visa"/><label for = "Visa"> Visa</label>
+	<input type = "radio" name = "oplata" id = "MasterCard" title = "MasterCard" value = "MasterCard"/><label for = "MasterCard"> MasterCard</label><br />
+	<label>Номер карты </label><input type = "text" id = "numbercard" name = "numbercard"/><br />
+	<label>Срок действия </label><input type = "text" id = "datecard" name = "datecard"/><br />
+	<input type = "button" name = "button_form" id = "button_form" value = "Скрыть"/>
+	<input type = "submit" name = "submit_form" id = "submit_form" value = "Отправить"/>
+	</form>
+	<a href="#" title="" id="so">Обо мне</a>
+	<a href="#" title="" id="contact">Контакты Карл!</a>
+	<p></p>
+	<div id = "ttx_jquery">
+		<ul>
+			<li><a href="#details">Описание товара</a></li>
+			<li><a href="#review">Отзывы</a></li>
+			<li><a href="#order">Заказать</a></li>
+		</ul>
+		<div id = "details">
+			<p>I think that details</p>
+		</div>
+		<div id = "review">
+			<p>I think that review</p>
+		</div>
+		<div id = "order">
+			<p>I think that order</p>
+		</div>
+	</div>
+	<div id = "ttx">
+		<div id = "ttx_input">
+			<input type = "radio" name = "ttx" id = "general" value = "general"/>
+			<input type = "radio" name = "ttx" id = "detail" value = "detail"/>
+			<input type = "radio" name = "ttx" id = "overview" value = "overview"/>
+			<input type = "radio" name = "ttx" id = "reviews" value = "reviews"/><br/>
+			<label for="general">Общие</label>
+			<label for="detail">Подробнее</label>
+			<label for="overview">Обзоры</label>
+			<label for="reviews">Отзывы</label>			
+			<p id="text_general">Это текст раздела общий</p>
+			<p id="text_detail">Это текст раздела подробнее</p>
+			<p id="text_overview">Это текст раздела обзоры</p>
+			<p id="text_reviews">Это текст раздела отзывы</p>
+		</div>
+	</div>
+	<script id="contactInfo" type="text/template">
+		<p> Наш телефон 555-55-5555</p>
+		<p><img src="images/cat1.jpg" title="I'm a cat!"></p>
+	</script>
+	<script id="tooltipTemplate" type="text/template">
+		<h2>Обо мне</h2>
+		<ul>
+			<li>Hana</li>
+			<li>Tool'</li>
+		</ul>
+	</script>
+	<script>
+		$(document).ready(function() {
+			$('#hello').dialog({buttons: {
+							"Подтвердить": function() {$(this).dialog('close');}, 
+							"Отменить": function() {}
+						}, autoOpen: false,
+				modal: true, resizable: false, draggable: false, hide: 'drop'});
+				
+			$('#confirm').dialog({
+						position: {my: 'center', at: 'top'}, 
+						modal: true, 
+						autoOpen: false,
+						buttons: {
+							"Подтвердить": function() {
+								$('#robot').effect('explode');
+								$(this).dialog('close');
+							},
+							"Отмена": function() {
+								$(this).dialog('close');
+							}
+						}
+			});
+			$('#robot').click(function() {
+				$('#confirm').dialog('open');
+			});
+			
+			$('[title]').tooltip({tooltip: 'tooltip'});
+			/*$('#so').tooltip({
+				content: '<img src="images/cat1_h.jpg" alt="look at me!">'
+			});*/
+			$('#so').tooltip({
+				content: $('#tooltipTemplate').html()
+			});
+			$('#contact').tooltip({
+				content: $('#contactInfo').html()
+			});
+			
+			$('#ttx_jquery').tabs({show: 'slideDown', hide: 'slideUp', active: 0, event: 'mouseover'});
+			
+			$('#numbercard').prop('disabled', true);
+			$('#datecard').prop('disabled', true);
+			$(':text:first').focus();
+			$('#PayPal').click(function() {
+				$('#numbercard').prop('disabled', true);
+				$('#datecard').prop('disabled', true);				
+			});
+			$('#Visa, #MasterCard').click(function() {
+				$('#numbercard').prop('disabled', false);
+				$('#datecard').prop('disabled', false);	
+			});
+			$('#username').focusout(function() {
+				$('.error_message').slideDown('slow').fadeOut(3000);
+			});
+			$('#button_form').click(function(e) {
+				e.preventDefault();
+				if ($('#numbercard, #datecard').css('display') == "none") {
+					$('#numbercard, #datecard').slideDown('slow');	
+					console.log("Вернул");
+				}
+				else {
+					$('#numbercard, #datecard').slideUp('slow');
+					console.log("Убрал");
+				}
+			});
+			$('#usercountry').on('click', function () {
+				if ($('#usercountry :selected').val() == "Бразилия") {
+					$('#numbercard').css('display', 'none');
+				}
+				else {
+					$('#numbercard').css('display', 'inline-block');
+				}
+			});
+		}); 
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery</title>
+    <meta charset = "UTF-8">
+    <meta name = "keywords" content = "">
+    <meta name = "description" content = "">
+    <link rel = "stylesheet" href = "style.css">
+    <link rel = "stylesheet" href = "l-style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="l-script.js"></script>
+</head>
+<style>
+	.close {
+		display:none;
+	}
+	#header {
+		position: relative;
+	}
+	#message {
+		opacity: 0;
+		top: 20px;
+		position: absolute;
+	}
+	#increase {
+		width: 100px;
+		height: 100px;
+		background: #777;
+	}
+	#navigation ul, #navigation li {
+		padding: 0;
+		margin: 0;
+	}
+	#navigation>li {
+		display: inline-block;
+		vertical-align: top;
+		position: relative;
+	}
+	#navigation li {
+		list-style: none;
+	}
+	#navigation>li a {
+		background: orange;
+		padding: 5px 10px;
+		display: block;
+	}
+	#navigation li ul {
+		position: absolute;
+		top: 100%;
+		width: 200px;
+		left: 0;
+		z-index: 999;
+	}
+</style>
+<body>
+<header>
+<ul id = "navigation">
+	<li><a href = "#"><span>Домой</span></a></li>
+	<li><a href = "#"><span>О Нас</span></a>
+		<ul>
+			<li><a href = "#"><span>Наша история</span></a></li>
+			<li><a href = "#"><span>Как нас найти</span></a></li>
+			<li><a href = "#"><span>Часы работы</span></a></li>
+		</ul>
+	</li>
+	<li><a href ="#"><span>Наши товары</span></a>
+		<ul>
+			<li><a href = "#"><span>Штуковины</span></a>
+				<ul>
+					<li><a href = "#"><span>Простая штуковина</span></a></li>
+					<li><a href = "#"><span>Стандартная штуковина</span></a></li>
+					<li><a href = "#"><span>Продвинутая штуковина</span></a>
+						<ul>
+							<li><a href = "#"><span>Продвинутый гаджет А</span></a></li>
+							<li><a href = "#"><span>Продвинутый гаджет В</span></a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</header>
+<div id="header">
+	<h1>Hello World!</h1>
+	<p id = "message">This text or not</p>
+</div>
+<div id = "login">
+	<a href = "form.html"><p id = "open">Login</p></a>
+	<form class = "close" action = "form.html" method = "POST">
+		<input type = "text" name = "loginform" id = "loginform" placeholder = "Введите Логин" /><br />
+		<input type = "password" name = "passform" id = "passform" placeholder = "Введите Пароль" /><br />
+		<input type = "submit" name = "buttonform" id = "buttonform" value = "Отправить" />
+		<input type = "submit" name = "closeform" id = "closeform" value = "Закрыть" />
+	</form>
+</div>
+<div id = "increase"></div>
+<div id = "gallery">
+	<a href = "images/cat1_h.jpg"><img src = "images/cat1.jpg"></a>
+	<a href = "images/cat2_h.jpg"><img src = "images/cat2.jpg"></a>
+	<a href = "images/cat3_h.jpg"><img src = "images/cat3.jpg"></a>
+	<a href = "images/cat4_h.jpg"><img src = "images/cat4.jpg"></a>
+	<a href = "images/cat5_h.jpg"><img src = "images/cat5.jpg"></a>
+	<a href = "images/cat6_h.jpg"><img src = "images/cat6.jpg"></a>
+</div>
+<script>
+	$('h1').hide().slideDown(100);
+	$('#header').append('<div id="new">');
+	$('#header').find('#new').append('<h2>Hey!</h2>');
+	$('#header').on('click', 'h1', function() {
+		$('#message').animate(
+		{
+			left: '20px',
+			opacity: 1
+		}, 
+		3000
+		);
+	});
+	$(document).ready(function() {
+		$('#gallery img').each(function() {
+			var imgFile = $(this).attr('src');
+			var preloadImage = new Image();
+			var imgExt = /(\.\w[3,4]$)/;
+			preloadImage.src = imgFile.replace(imgExt, '_h$1');
+			$(this).hover(
+				function() {
+					$(this).attr('src', preloadImage.src);
+				},
+				function() {
+					$(this).attr('src', imgFile);
+				}
+			);
+		});
+		$('#open').click(function(e) {
+			e.preventDefault();
+			$('#login').find('form').slideToggle(300);
+			//$('#login').find('form').fadeIn(300);
+			$(this).toggleClass('close');
+		});
+		$('form').on('click', '#closeform', function(e) {
+			e.preventDefault();
+			$(this).closest('#login').find('form').slideToggle(300);
+			$(this).closest('#login').find('#open').toggleClass('close');
+		});
+		$('#increase').on('mouseenter', function() {
+				$(this).stop().animate(
+				{
+					width: '300px',
+					height: '300px'
+				}, 1000
+				)
+			});
+		$('#increase').on('mouseleave', function() {
+				$(this).stop().animate(
+				{
+					width: '100px',
+					height: '100px'
+				}, 1000
+				)
+			});
+		/*$('#increase').on('click', function() {
+			$(this).animate(
+			{
+				width: '400px',
+				height: '400px'
+			}, 1000,
+				function() {
+					$(this).animate(
+					{
+						width: '200px',
+						height: '200px'
+					}, 1000
+					).fadeOut(3000);
+				}
+			);
+		});*/
+	});
+</script>
+</body>
+</html>
