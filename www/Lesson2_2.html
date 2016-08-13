@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lesson 2_2</title>
+    <script type="text/javascript" src="lib/jquery-3.1.0.min.js"></script>
+</head>
+
+<style>
+
+</style>
+<body>
+<form>
+    <label>Login </label> <input type="text" name="login" id="login"/><br/>
+    <label>Password </label> <input disabled="disabled" type="text" name="password" id="password"/><br/>
+    <input type="submit" value="Send"/>
+    <input type="button" value="Show"/><br/>
+    Big<input type="checkbox" value="big"><br/>
+    Medium<input type="checkbox" value="medium"><br/>
+    Small<input type="checkbox" value="small"><br/>
+    <p class="output"></p>
+    <input type="file">
+</form>
+
+
+<script>
+$(document).ready(function(){
+    $(":button").css("font-weight", "bold"); // Выбирает все button
+    var count = $(":checkbox").length; // length считает количество эл-ов
+    // $(".output").text("Количество checkbox - " + count); // Добавляем текст
+    var countChecked = function() {
+        var n = $("input:checked").length;
+        $(".output").text("Пунктов отмечено - " + n);
+    };
+    countChecked();
+    $("input[type=checkbox]").on("click", countChecked); // Вызываем функцию по нажатию на checkbox
+    $("input:disabled").val("disabled"); // Во все input с disabled добавляет текст disabled
+    $("input[type=text]:enabled").val("enabled"); // см. выше, только с enabled
+    $(":file").css("border", "1px solid red"); // Выбирает input с type=file
+});
+</script>
+</body>
+</html>

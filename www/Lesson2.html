@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lesson 2</title>
+    <script type="text/javascript" src="lib/jquery-3.1.0.min.js"></script>
+</head>
+<style>
+    #animate div {
+        display: inline-block;
+        width: 200px;
+        height: 200px;
+        margin-right: 20px;
+    }
+</style>
+<body>
+<h1>H1</h1>
+<h2>H2</h2>
+<h3>H3</h3>
+<p>Параграф 0</p>
+<p>Параграф 1</p>
+<p>Параграф 2</p>
+<p>Параграф 3</p>
+<ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+    <li>Item 4</li>
+</ul>
+<ul>
+    <li>Item 5</li>
+    <li>Item 6</li>
+    <li>Item 7</li>
+    <li>Item 8</li>
+</ul>
+<ul id="three">
+    <li>Item 5</li>
+    <li>Item 6</li>
+    <li>Item 7</li>
+    <li>Item 8</li>
+</ul>
+<ul id="four">
+    <li>Item 5</li>
+    <li>Item 6</li>
+    <li>Item 7</li>
+    <li>Item 8</li>
+</ul>
+<div>
+    <p>Тут 1 параграф</p>
+</div>
+<div>
+    <p>Тут 2</p>
+    <p>Параграфа</p>
+</div>
+<div id="interval">
+    <ul class="interval">
+        <li>Some 1</li>
+        <li>Some 2</li>
+        <li>Some 3</li>
+        <li>Some 4</li>
+    </ul>
+    <ul id="not">
+        <li>Some 5</li>
+        <li>Some 6</li>
+        <li>Some 7</li>
+        <li>Some 8</li>
+    </ul>
+</div>
+<div id="animate">
+    <div></div>
+    <div></div>
+    <div id="animated"></div>
+</div>
+<script>
+$(document).ready(function() {
+    //$("p:even").css("background", "red"); // :even выбирает четные индексы
+    //$("p:odd").css("background", "yellow"); // :odd выбирает нечетные индексы
+    $("li:first").css("color", "brown"); // Для первого элемента li
+    $("li:last").css("color", "red"); // Для последнего элемента li
+    $("ul li:first-child").css("background", "orange"); // Для первого дочернего элемента li
+    $("ul li:last-child").css("background", "blue"); // Для последнего дочернего элемента li
+    $("div p:only-child").css("background", "pink"); // div где p один дочерний элемент
+    $("ul li:nth-child(2)").css("border", "1px solid black"); // Выбираем 2й элемент в списке
+    $("#three").find("li:nth-child(even)").css("background", "aqua"); // Выбирает все четные дочерние элементы
+    $("#four").find("li:nth-child(odd)").css("background", "gold"); // Выбирает все нечетные дочерние элементы
+    // eq() - Выбор элемента по индексу
+    // gt() - Все элементы, индекс которых больше указаного
+    // lt() - Все элементы, индекс которых меньше указаного
+    var some_main = $("#interval");
+    var some = some_main.find("ul li");
+    some.css({"color": "black", "border": "0", "background": "none"}); // Перечисление свойств
+    some.filter(":first-child").css("background", "yellow"); // filter ищет нужный элемент в кэше
+    var i = 0;
+    $(function() {
+        var timer = setInterval(choose, 1500);
+    });
+    function choose() {
+        i++;
+        var some1 = $("#interval").find('.interval');
+        some1.find("li:eq(" + (i - 1) + ")")
+                .css("background", "white");
+        some1.find("li:eq(" + i + ")")
+                .css("background", "yellow");
+    }
+    var some2 = some_main.find("#not li");
+    some2.css("background", "none");
+    some2.filter(":not(li:eq(2))").css("background", "orange"); // Фильтруем все элементы, кроме эл-та с индексом 2
+    $(':header').css("background-color", "#4dea4d"); // Применяется ко всем заголовкам
+    var animate = $("#animate").find("div");
+    animate.css("border", "1px solid black");
+    animate.filter("#animated").css("border", "1px solid red").hide(3000); // скрывает элемент за 3000мс
+    $(":animated").css("background", "red"); // Выбирает все элементы, в которых происходит анимация
+});
+</script>
+</body>
+</html>

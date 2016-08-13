@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lesson 2_1</title>
+    <script type="text/javascript" src="lib/jquery-3.1.0.min.js"></script>
+</head>
+
+<style>
+    .empty {
+        width: 200px;
+        height: 100px;
+        border: 1px solid black;
+        display: inline-block;
+        vertical-align: top;
+    }
+</style>
+
+<body>
+    <input type="text" name="search_text" id="search_text"/>
+    <input type="button" name="search" id="search" value="search"/>
+    <p>Здесь есть HTML</p>
+    <p>А тут нет хтмл</p>
+    <p>Hello world</p>
+    <div class="empty"></div>
+    <div class="empty"><p>Some tuk tuk</p></div>
+
+
+<script>
+    $(document).ready(function() {
+        // $("p:contains('HTML')").css("color", "red"); // Выделяет р в котором есть HTML
+        $("#search").on('click', function() {
+            var info = $("#search_text").val(); // Берем значение из инпута
+            $("p").css("background", "none");
+            $("p:contains(" + info + ")").css("background", "yellow");
+
+        });
+        $(".empty:empty").css("background", "blue"); // empty - если ячейка пустая
+        $("div:has(p)").css("background", "aqua"); // div, который содержит р
+        // $("img[alt~='new']") - Выбор всех img с атрибутом alt, содержащий new
+        // $("a[target!=_blank]") - Выбор всех ссылок не открывающихся в новом окне
+    });
+</script>
+
+</body>
+</html>
