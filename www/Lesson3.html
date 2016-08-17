@@ -6,9 +6,15 @@
 </head>
 
 <style>
-b {
-    color: cadetblue;
-}
+    b {
+        color: cadetblue;
+    }
+    .first {
+        font-size: 20px;
+    }
+    .testClassGreen {
+        color: green;
+    }
 </style>
 <body>
 <p style="color: blue; font-weight: bold;">Test</p>
@@ -26,13 +32,21 @@ b {
 <input type="text" id="edit1" value />
 <input type="button" id="button1" value="Push"/>
 <input type="button" id="button2" value="Get"/>
+<p id="first" class="first">TestGreen</p>
+<p id="second">TestGreen</p>
+<div id="toggle">
+    <p class="class1">Op</p>
+    <p>Laleyla</p>
+</div>
+<div id="hasClass" class="notHasClass">
 
+</div>
 <script>
 $(document).ready(function() {
     var style = $("p").attr("style"); // Считывает style
     var p = $("#output");
     p.html("<b>Значение атрибута \"style\"</b> - " + style); // Добавляет текст в #output
-    $("p").attr("class", "blue"); // Добавляет класс
+    //$("p").attr("class", "blue"); // Добавляет класс
     $("#attrjson").attr({ // Задает комплекс стилей
         style:"color:red; font-size: 22pt",
         title: "Jquery"
@@ -57,6 +71,27 @@ $(document).ready(function() {
     $("#button2").click(function () {
         alert($("#edit1").val()); // Чтение из поля ввода
     });
+    function adding_class() {
+        $("#first").addClass("testClassGreen"); // Добавляет класс элементу
+        $("#second").addClass("testClassGreen");
+    }
+    adding_class();
+    function delete_class() {
+        $("#first").removeClass("testClassGreen"); // Удаляет класс, если класс не указан, то удаляет все.
+    }
+    delete_class();
+
+    $("#toggle").on("click", toggle);
+    function toggle() {
+        $("#toggle").find("p").toggleClass("class1"); // Добавляет или удаляет класс у элемента
+    }
+    function check_class() {
+        var className = "notHasClass";
+        if ($("#hasClass").hasClass(className)) { // Если есть указанный класс...
+            alert("Тег содержит указанный CSS-класс - " + className);
+        }
+    }
+    // check_class();
 });
 </script>
 </body>
