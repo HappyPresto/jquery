@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lesson 3</title>
+    <script type="text/javascript" src="lib/jquery-3.1.0.min.js"></script>
+</head>
+
+<style>
+    b {
+        color: cadetblue;
+    }
+    .first {
+        font-size: 20px;
+    }
+    .testClassGreen {
+        color: green;
+    }
+</style>
+<body>
+<p style="color: blue; font-weight: bold;">Test</p>
+<div id="output"></div>
+<p>The class blue!</p>
+<p id="attrjson">Attr Json</p>
+<p id="attrjson2">Attr Json</p>
+<p class="removeattr" style="color: blue">Oops style delete</p>
+<p class="removeattr" style="color: blue">Oops style delete</p>
+<br/>
+Сохранить пароль?
+<input type="checkbox" checked="checked" title="Сохранить\не сохранить пароль">
+<p id="check"></p>
+<p id="removeprop"></p>
+<input type="text" id="edit1" value />
+<input type="button" id="button1" value="Push"/>
+<input type="button" id="button2" value="Get"/>
+<p id="first" class="first">TestGreen</p>
+<p id="second">TestGreen</p>
+<div id="toggle">
+    <p class="class1">Op</p>
+    <p>Laleyla</p>
+</div>
+<div id="hasClass" class="notHasClass">
+
+</div>
+<script>
+$(document).ready(function() {
+    var style = $("p").attr("style"); // Считывает style
+    var p = $("#output");
+    p.html("<b>Значение атрибута \"style\"</b> - " + style); // Добавляет текст в #output
+    //$("p").attr("class", "blue"); // Добавляет класс
+    $("#attrjson").attr({ // Задает комплекс стилей
+        style:"color:red; font-size: 22pt",
+        title: "Jquery"
+    });
+    function CalculateValue() { // создаем функцию
+        return "color: red";
+    }
+    $("#attrjson2").attr("style", CalculateValue()); // Записываем в style результат функции
+    // $("p:odd").removeAttr("style"); // Удаляет атрибут style у элемента
+    $("input").change(function() { // Вызов функции при срабатывание при изменении инпута
+        var input = $(this); // в input записываем выбранный инпут
+        $("#check").html(
+                ".attr( \"checked\" ): <b>" + input.attr("checked") + "</b><br>" +
+                ".prop( \"checked\" ): <b>" + input.prop("checked") + "</b><br>"  + "</b>");
+    }).change();
+    $("#removeprop").prop("secretCode", 1234); // Добавляем значение и свойство
+    $("#removeprop").append("Секретный код: ", String($("#removeprop").prop("secretCode")), ". "); // append - Добавляет контент внутрь каждого элемента набора.
+    // $("#removeprop").removeProp("secretCode"); // Удалить значение свойства
+    $("#button1").click(function () {
+       $("#edit1").val("Hello"); // Запись в поле ввода
+    });
+    $("#button2").click(function () {
+        alert($("#edit1").val()); // Чтение из поля ввода
+    });
+    function adding_class() {
+        $("#first").addClass("testClassGreen"); // Добавляет класс элементу
+        $("#second").addClass("testClassGreen");
+    }
+    adding_class();
+    function delete_class() {
+        $("#first").removeClass("testClassGreen"); // Удаляет класс, если класс не указан, то удаляет все.
+    }
+    delete_class();
+
+    $("#toggle").on("click", toggle);
+    function toggle() {
+        $("#toggle").find("p").toggleClass("class1"); // Добавляет или удаляет класс у элемента
+    }
+    function check_class() {
+        var className = "notHasClass";
+        if ($("#hasClass").hasClass(className)) { // Если есть указанный класс...
+            alert("Тег содержит указанный CSS-класс - " + className);
+        }
+    }
+    // check_class();
+});
+</script>
+</body>
+</html>

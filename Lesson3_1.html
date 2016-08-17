@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lesson 3_1</title>
+    <script type="text/javascript" src="lib/jquery-3.1.0.min.js"></script>
+</head>
+<style>
+#jsheight {
+    width: 300px;
+    height:250px;
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid black;
+}
+</style>
+<body>
+<p id="p">Op</p>
+<div style="padding-top: 30px; background: lightblue; position: relative;">
+    <div id="jsheight"></div>
+    <div id="offsetParent"></div>
+</div>
+<div id="offset"></div>
+<div id="position"></div>
+<script>
+    $(document).ready(function(){
+        $("#p").css({
+           color: "green",
+           backgroundColor: "lightgray"
+        });
+        var a = "";
+        a += "height() - " + $("#jsheight").height() + "<br />"; // Высота элемента без учета внутренних отступов и толщины рамки
+        a += "innerHeight() - " + $("#jsheight").innerHeight() + "<br />"; // Высота элемента с учетом паддинга
+        a += "outerHeight() - " + $("#jsheight").outerHeight() + "<br />"; // Высота с учетом паддинга и рамки, и при необходимости, маргинов
+        a += "outerHeight(true) - " + $("#jsheight").outerHeight(true) + "<br />"; // см.выше (с маргином)
+        $("#p").html(a);
+        // $("div").height(400); Задает высоту элементу
+        // width, innerWidth(), outerWidth(), outerWidth(true) - Аналогично Height.
+        var element = $("#jsheight").offset(); // Возвращает координаты выбранного элемента относительно начала страницы, можно изменить координаты элемента
+        var offset = $("#offset");
+        offset.html("Координаты jsheight: <br />" + "x: " + element.left + "<br />y: " + element.top);
+        var element1 = $("#jsheight").position(); // Возвращает координаты выбранного элемента относительно начала родителя.
+        var output = $("#position");
+        output.html("Мои координаты относительно родителя:<br />" + "x: " + element1.left + "<br />y: " + element1.top);
+        $("#offsetParent").offsetParent().css("background-color", "orange"); // Возвращает ближайшего предка (из числа родителей), у которого задан тип позиционирования (position = relative \ fixed \ absolute) 
+    });
+</script>
+</body>
+</html>
