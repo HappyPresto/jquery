@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lesson 3</title>
+    <script type="text/javascript" src="lib/jquery-3.1.0.min.js"></script>
+</head>
+<style>
+    #parents {
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+    }
+    #parents div {
+        width: 50px;
+        height: 50px;
+        border: 1px solid black;
+    }
+</style>
+<body>
+<div id="add">
+    <p>Test 1</p>
+    <span>Test 2</span>
+</div>
+<div id="contents">
+    Lorem
+    <p>Ipsumloreame</p>
+</div>
+<div id="children">
+    <div>
+        <p>Not children</p>
+    </div>
+    <p>Children</p>
+</div>
+<div id="parent"><p>Hover</p></div>
+<div id="parents"><div><p>Oops</p></div></div>
+
+<div id="offsetParent"></div>
+<div id="next">
+    <p>1</p>
+    <span>2</span>
+    <p class="nextAll">nextAll</p>
+    <p>3</p>
+    <p>4</p>
+    <span>No pink :(</span>
+    <p>5</p>
+    <p>6</p>
+</div>
+<div id="prev"></div>
+<div id="nextAll"></div>
+<div id="prevAll"></div>
+<div id="nextUntil"></div>
+<div id="prevUntil"></div>
+<script>
+    $(document).ready(function() {
+        $("#add").find("p").add("span").css("background-color", "red"); // add - Добавляет к выборке выбранный элемент
+        $("#contents").contents().filter(function() {
+            return this.nodeType === 3;
+        }).wrap("<p></p>"); // Contents - Получает потомков каждого элемента в наборе соответствующих элементов, включая текстовые узлы.
+        $("#contents").find("p").css("color", "red");
+        $("#children").children("p").css("background-color", "red"); // Получить все дочерние элементы. Аналог ">" в css
+        $("#parent").find("p").hover(
+                function () { // parent - возвращает ссылку на ближайшего родителя
+                    $(this).css("color", "yellow").parent().css("background-color", "grey");
+                },
+                function () {
+                    $(this).css("color", "blue").parent().css("background-color", "blue");
+                }
+        );
+        $("#parents").find("div").find("p").parents("div").css("background-color", "yellow"); // Выбирает все родительские элементы (узлы).
+        $("#next").find("p").filter(":first").next().css("background", "yellow"); // Выбирает следующий элемент
+        $("#next").find(".nextAll").nextAll("p").css("color","pink"); // Выбирает все последующие элементы
+        $("#next").find(".nextAll").nextUntil("span").css("background", "green"); // Указываем до какого выбираем элементы
+        // prev , prevAll, prevUntil аналогичны next.
+    });
+</script>
+</body>
+</html>
