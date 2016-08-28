@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lesson 6</title>
+    <script type="text/javascript" src="lib/jquery-3.1.0.min.js"></script>
+</head>
+<style>
+div {height: 100px; width: 100px; background-color: #fdf5ce;}
+    #show {display: none;}
+    #slideDown p, #fadein p {display: none;}
+</style>
+<body>
+<div id="animate"></div><br />
+<div id="queue"></div>
+<div id="show"><p>Show!</p></div>
+<div id="hide"><p>Hide!</p></div>
+<div id="toggle"><p>lololo!</p></div>
+<div id="slideDown"><p>Are!</p></div>
+<div id="slideUp"><p>Wi!</p></div>
+<div id="slideToggle"><p>Wi! Are! Wi Wi! Are!</p></div>
+<div id="fadein"><p>FAAAAAADE</p></div>
+<div id="fadeOut"><p>OOOooOOOut!</p></div>
+<div id="fadeTo"><p>FAOo?</p></div>
+
+
+<script>
+$(document).ready(function() {
+    // animate() - можно анимировать отдельные жлементы DOM дерева
+    $("#animate").animate({opacity: 0.30, marginLeft: '150px'}, 1000) // 1000 - продолжительность анимации
+            .animate({opacity: 1, marginLeft: 0}, 1000);
+    var anim = {marginLeft: '150px'};
+    var options = {queue: false, duration: 3000}; // queue: false - заставляет вторую анимацию выполняться параллельно первой
+    /*$("#queue").animate(anim, options)
+            .animate({width: '50px', height: '50px'}, 3000,
+            function() {alert("Done!"); // функция после окончания анимации
+    });*/
+    // anim_block.mouseover(function() {anim_block.animate(option_in_div, 400);
+    $('#show').show("slow"); // Показывает элемент
+    $('#hide').hide('slow'); // Скрывает элемент
+    $('#toggle').on('click', function () {
+        $('#toggle').find("p").toggle('slow'); // Включает сразу обе функции (show & hide)
+    });
+    $('#slideDown').on('click', function () {
+        if ($('#slideDown').find("p").is(':hidden')) {$('#slideDown').find("p").slideDown("slow");}
+        else {$('#slideDown').find("p").hide(3000);}
+        });
+    $('#slideUp').on('click', function () {
+        $("#slideUp").slideUp("slow");
+    });
+    $('#slideToggle').on('click', function() {
+        $('#slideToggle').find("p").slideToggle("slow"); // Переключает видимость всех совпавших элементов, используя эффект изменения высоты
+    });
+    $('#fadein').on('click', function() {
+        $('#fadein').find("p").fadeIn("slow"); // Плавное изменение прозрачности
+    });
+    $('#fadeOut').on('click', function() {
+        $('#fadeOut').find("p").fadeOut("slow"); // Плавное изменение прозрачности
+    });
+    $('#fadeTo').on('click', function() {
+        $('#fadeTo').find("p").fadeTo("slow", 0.3); // До какого значения прозрачности
+    });
+    // delay() - функция устанавливает таймер задержки выполнения
+    // queue() - функция, возвращает ссылку на первый элемент в очереди
+    // clearQueue() - функция удаляет из очереди все элементы, которые еще не были выполнены
+    // deQueue() - функция выполняет следующую функцию в очереди для соответствующих элементов
+    // stop() - функция останавливает в данное время работающую анимацию на соот-ие элементы
+
+    // fadeOut("slow").delay(2000).fadeIn("slow");
+    // var q = div.queue('fx') - Хранит все анимации элемента
+    /* .animate({left: '200px'}, 2000).queue(function() {$(this).toggleClass("red").dequeue();})
+            .animate({left: "10px", top: "30px}, 700); - если не будет стоять dequeue, то последующие анимации не выполнятся*/
+    // div.clearQueue() - Очищает очередь анимации у элемента
+});
+</script>
+</body>
+</html>

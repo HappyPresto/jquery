@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lesson 3</title>
+    <title>Lesson 4_1</title>
     <script type="text/javascript" src="lib/jquery-3.1.0.min.js"></script>
 </head>
 <style>
@@ -50,6 +50,16 @@
 <div id="prevAll"></div>
 <div id="nextUntil"></div>
 <div id="prevUntil"></div>
+<div id="siblings">
+    <p>Sib_1</p>
+    <p class="siblings">Sib_2</p>
+    <p>Sib_3</p>
+</div>
+<p><b></b></p>
+<div id="end">
+    <p>1</p>
+    <div>2</div>
+</div>
 <script>
     $(document).ready(function() {
         $("#add").find("p").add("span").css("background-color", "red"); // add - Добавляет к выборке выбранный элемент
@@ -71,6 +81,13 @@
         $("#next").find(".nextAll").nextAll("p").css("color","pink"); // Выбирает все последующие элементы
         $("#next").find(".nextAll").nextUntil("span").css("background", "green"); // Указываем до какого выбираем элементы
         // prev , prevAll, prevUntil аналогичны next.
+        var len = $(".siblings").siblings().css("color", "red").length; // siblings - Получение всех родственных элементов
+        $("b").text(len);
+        //$("#siblings").find("p").andSelf().addClass("brder"); // Поидее берет внутренние р и див, но почему то не работает.
+        $("#end").find("p").add("#end div").css("border", "1px solid black")
+                .end().css("background-color", "green"); // Отменяет последнее деструктивное действие, возвращая тем самым набор элементов к его предыдущему состоянию.
+        // split(" ") - разбивает текст по пробелам
+        // join ("<span> </span") - оборачиваем каждое слово в span
     });
 </script>
 </body>

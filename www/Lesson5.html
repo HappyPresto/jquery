@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lesson 5</title>
+    <script type="text/javascript" src="lib/jquery-3.1.0.min.js"></script>
+</head>
+<style>
+    div {
+        height: 100px;
+        width: 100px;
+        border: 1px solid black;
+    }
+</style>
+<body>
+<div id="over"></div>
+<div id="out"></div>
+<span></span>
+<ul id="click">
+    <li>Text</li>
+    <li>Text</li>
+    <li>Text</li>
+    <li>Text</li>
+    <li>Text</li>
+</ul>
+<span id="json"></span>
+<script>
+$(document).ready(function() {
+    // focus - событие происходит, когда элемент получает фокус
+    // blur - событие происходит, когда элемент теряет фокус
+    // load - Загружена вся страница
+    // event - объект, определяющий информацию о событии
+    // hover - $("div").hover(onIn,onOut) - можно делать и так
+    // mousemove - функция, устанавливающая обработчик на событие движение курсора по поверхности элемента.
+    // on - аналог addEventListener() в JS \\ $("#button").on("click",function(){...});
+    // off - аналог removeEventListener в JS \\ $("#button").click(function(){...});
+    // trigger - Вызывает событие для каждого элемента набора
+    var overCount = 0;
+    var outCount = 0;
+    $(function () {
+        $("div:first").mouseover(function () {
+            overCount++;
+            Update();
+        }); // курсор попадает в область
+        $("div:last").mouseout(function () {
+            outCount++;
+            Update();
+        });
+        $("div").mousemove(function (e) { // e - объект с информацией о событии
+           var page = "( " + e.pageX + ", " + e.pageY + " )";
+           $("span").text("Page coords " + page);
+        });
+    });
+    function Update() {
+        $("#over").text("MouseOver " + overCount);
+        $("#out").text("MouseOut " + outCount);
+    }
+    $("#click").on("click", function (e) {
+       $(e.target).css("background", "red"); // target - Получаем доступ к тому узлу, по которому было осуществленно нажатие
+
+    });
+    $("#out").on('click',{param1: "hello", param2: "World"}, Handler); // Дополнительные данные с помощью JSON-объекта
+    var a = {login: 'admin', pas: '123'}; $("#out").on('click', a, Handler); // Или вот так можно сделать
+    function Handler(e) {
+        alert(e.data.param1 + " " + e.data.param2);
+    }
+    // $("#first").off('click', show) - Убирает обработчик show по клику
+    // $("#first").one('click', show) - Аналог on, но срабатывает всего единожды
+    // function button() { button1.trigger("click");} // вызывает событие button1
+});
+</script>
+</body>
+</html>
