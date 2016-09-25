@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lesson 7_3</title>
+    <link rel="stylesheet" href="jquery-ui.css"/>
+    <script type="text/javascript" src="lib/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+</head>
+<body>
+<p>Date: <input type="text" id="datepicker"/></p>
+<p>Date2: <input type="text" id="datepicker2"/></p>
+<p>Календарь виден сразу</p>
+<div id="datepicker3"></div>
+<p>Date4: <input type="text" id="datepicker4"/></p>
+
+<script>
+$(document).ready(function(){
+    $("#datepicker").datepicker({
+        showOn: "button", // отображать при нажатии на кнопку, возможные значения (focus, button, both)
+        buttonImage: "images/cat1.jpg", // Путь к картинке, которая будет отображаться на кнопке
+        buttonImageOnly: true, // true - не отображать кнопку, только изображение.
+        //minDate: -20, // Мин дата
+        //maxDate: "+1M + 10D", // Макс дата (+1 месяц и 10 дней)
+        //numberOfMonths: 3, // Кол-во месяцев за раз
+        showButtonPanel: true, // необходимость отображать панель с кнопками
+        dateFormat: "d M, y", // Меняем формат выводы даты
+        defaultDate: "+1w", // Дата по умолчанию +1 неделя
+        changeMonth: true, // есть возможность менять месяц с помощью выпадающего списка
+        onSelect: function (selectedDate) {
+            $("#datepicker2").datepicker("option", "minDate", selectedDate);
+        }
+    }); // Используем календарик
+    $("#datepicker2").datepicker({
+        defaultDate: "+1w", // Дата по умолчанию +1 неделя
+        changeMonth: true, // Есть возможность менять месяц с помощью выпадающего списка
+        dateFormat: "d M, y", // Меняем формат выводы даты
+        onSelect: function(selectedDate) {
+            $("#datepicker").datepicker("option", "maxDate", selectedDate);
+        }
+    });
+    $('#datepicker3').datepicker();
+    // анимация появления календаря
+    $.datepicker.setDefaults($.datepicker.regional[""]); // Как то так ставится другой язык, нужно только библиотеку языка скачать
+    $('#datepicker4').datepicker({showAnim: "bounce"}, $.datepicker.regional["fr"]); //show (поумолч), slideDown, fadeIn, blind,
+    // bounce, clip, drop, fold, slide
+});
+</script>
+</body>
+</html>

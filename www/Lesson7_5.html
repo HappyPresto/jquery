@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lesson 7_5</title>
+    <link rel="stylesheet" href="jquery-ui.css"/>
+    <script type="text/javascript" src="lib/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+</head>
+<style>
+    #menu1 {width: 300px;}
+    #progressbar1 {height: 100%;}
+    #progress {height: 30px;}
+</style>
+<body>
+<ul id="menu">
+    <li><a href="#">Aa</a></li>
+    <li><a href="#">Bb</a></li>
+    <li><a href="#">Cc</a></li>
+    <li><a href="#">Dd</a></li>
+</ul>
+<br/>
+<ul id="menu1">
+    <li><a href="#">Aa</a></li>
+    <li><a href="#">Bb</a>
+        <ul>
+            <li><a href="#">aA</a></li>
+            <li><a href="#">aA1</a></li>
+        </ul>
+    </li>
+    <li><a href="#">Cc</a></li>
+    <li><a href="#">Dd</a></li>
+</ul>
+<br/>
+<div id="progressbar"></div>
+<br/>
+<div id="progress" class="ui-widget-default"><div id="progressbar1"></div></div>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+$(document).ready(function(){
+    $("#menu").menu();
+    $("#menu1").menu();
+    $("#progressbar").progressbar({value: 37});
+    $("#progressbar1").progressbar({value: 37});
+    $("#progress").resizable();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lesson 7_4</title>
+    <link rel="stylesheet" href="jquery-ui.css"/>
+    <script type="text/javascript" src="lib/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+</head>
+<body>
+<div id="dialog" title="basic_dialog">
+    <p>This is something text</p>
+</div>
+<div id="dialog1" title="basic_dialog">
+    <p>This is something text</p>
+</div>
+<div id="dialog2" title="basic_dialog">
+    <p><span class="ui-icon ui-icon-circle-check"></span>This is something text</p>
+</div>
+<div id="dialog3" title="Empty the recycle bin?">
+    <p><span class="ui-icon ui-icon-alert"></span>This is something text</p>
+</div>
+<div id="dialog4" title="Empty the recycle bin?">
+    <p><span class="ui-icon ui-icon-alert"></span>This is something text</p>
+</div>
+<button id="opener">Open</button>
+<script>
+$(document).ready(function(){
+     // $("#dialog").dialog(); // Делаем из дива диалоговое окно
+     // $("#dialog1").dialog({height:140, modal: true}); // доступ к элементам находящимся под окном, будет открыт только после закрытия самого окна
+    /*$("#dialog2").dialog({
+        modal: true,
+        buttons: { // Добавить кнопку
+            Ok: function () { // Ок
+                $(this).dialog("close"); // По нажатию будет закрытие
+            }
+        }
+    });*/
+    /*$("#dialog3").dialog({
+        resizable: false, //  Изменения окна невозможна
+        height: 270,
+        width: 400,
+        modal: true, // Создаем модальное окно
+        buttons: {
+            "Удалить все элементы": function () {
+                $(this).dialog("close");
+            },
+            Cancel: function () {
+                $(this).dialog("close");
+            }
+        }
+    });*/
+    $.fx.speeds._default = 5000; // Задает время анимации
+    $("#dialog4").dialog({
+        autoOpen: false, // Автооткрытие окна
+        show: "blind", // Анимация при открытии
+        hide: "explode" // При закрытии
+    });
+    $("#opener").click(function (){
+        $("#dialog4").dialog("open");
+        return false;
+    });
+
+});
+</script>
+</body>
+</html>

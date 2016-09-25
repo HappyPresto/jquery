@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lesson 7_2</title>
+    <link rel="stylesheet" href="jquery-ui.css"/>
+    <script type="text/javascript" src="lib/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+</head>
+<style>
+    #project-label {display: block; font-weight: bold; margin-bottom: 1em;}
+    #project-icon {float: left; height: 32px; width: 32px;}
+    #project-description {margin: 0; padding: 0;}
+</style>
+<body>
+<div class="ui-widget">
+Tags: <input id="tags" type="text"/>
+</div>
+
+<div id="project-label">Select a project (type "j" for a start):</div>
+<img id="project-icon" src="#" class="ui-state-default" alt="">
+<input id="project" type="text">
+<input type="hidden" id="project-id">
+<p id="project-description"></p>
+
+<script>
+$(document).ready(function(){
+    // .button() - Виджет визуализации кнопки
+    // .buttonset() - Виджет, позволяет сгруппировать эл-ты radio
+    // .button({ icons: {primary: "ui-icon-locked"}, text: false }) - Добавляет иконку кнопке, если текста не нужен, то ставим text: false
+    // .button({ icons: {primary: "...", secondary: "..."} - расположение иконки справа и слева
+    var availableTags = [ // Создаем массив значений для автополя
+        "Java",
+        "JavaScript",
+        "Haskell",
+        "Property",
+        "PHP",
+        "Python"
+    ];
+    $("#tags").autocomplete({ // Инициализируем автополе и привязываем к полю источник
+        source: availableTags
+    });
+    var projects = [
+        {
+            value: "jquery",
+            label: "jQuery",
+            desc: "The write less, do more, JavaScript Library",
+            icon: "cat1.jpg"
+        },
+        {
+            value: "jquery-ui",
+            label: "jQuery UI",
+            desc: "The official user interface library for jQ",
+            icon: "cat2.jpg"
+        },
+        {
+            value: "sizzle",
+            label: "Sizzle",
+            desc: "a pure-javascript css selector engine",
+            icon: "cat3.jpg"
+        }
+    ];
+    $("#project").autocomplete({
+        minLength: 1, // Минимальное количество элементов для поиска
+        source: projects, // источник
+        focus: function(e, ui) { // Настройка выделения варианта выбора при наведение мыши
+            $("#project").val(ui.item.label);
+            return false;
+        },
+        select: function (event, ui) { // Настройка отображения каждого элемента списка вариантов
+            $("#project").val(ui.item.label);
+            $("#project-id").val(ui.item.value);
+            $("#project-description").val(ui.item.desc);
+            $("project-icon").attr("src", "images/" + ui.item.icon);
+            return false;
+        }
+    });
+});
+</script>
+</body>
+</html>
